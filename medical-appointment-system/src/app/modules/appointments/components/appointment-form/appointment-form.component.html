@@ -1,0 +1,73 @@
+<p>appointment-form works!</p>
+<div class="container mt-4">
+  <h2>{{ isEdit ? 'Editar' : 'Crear' }} Cita Médica</h2>
+  
+  <div *ngIf="loading" class="text-center my-4">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Cargando...</span>
+    </div>
+  </div>
+
+  <form *ngIf="!loading" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="row g-3 mb-4">
+      <div class="col-md-6">
+        <label for="dates" class="form-label">Fecha</label>
+        <input type="date" class="form-control" id="dates" formControlName="dates">
+      </div>
+
+      <div class="col-md-6">
+        <label for="hour" class="form-label">Hora</label>
+        <input type="time" class="form-control" id="hour" formControlName="hour">
+      </div>
+
+      <div class="col-md-4">
+        <label for="customer" class="form-label">Paciente</label>
+        <select class="form-select" id="customer" formControlName="customer">
+          <option value="">Seleccione paciente</option>
+          <!-- Aquí irían opciones reales desde API -->
+          <option value="1">Juan Pérez</option>
+          <option value="2">María García</option>
+        </select>
+      </div>
+
+      <div class="col-md-4">
+        <label for="doctor" class="form-label">Doctor</label>
+        <select class="form-select" id="doctor" formControlName="doctor">
+          <option value="">Seleccione doctor</option>
+          <!-- Aquí irían opciones reales desde API -->
+          <option value="1">Dr. Carlos López</option>
+          <option value="2">Dra. Ana Martínez</option>
+        </select>
+      </div>
+
+      <div class="col-md-4">
+        <label for="specialty" class="form-label">Especialidad</label>
+        <select class="form-select" id="specialty" formControlName="specialty">
+          <option value="">Seleccione especialidad</option>
+          <!-- Aquí irían opciones reales desde API -->
+          <option value="1">Cardiología</option>
+          <option value="2">Pediatría</option>
+        </select>
+      </div>
+
+      <div class="col-12">
+        <label for="estado" class="form-label">Estado</label>
+        <select class="form-select" id="estado" formControlName="estado">
+          <option value="PENDIENTE">Pendiente</option>
+          <option value="CONFIRMADA">Confirmada</option>
+          <option value="CANCELADA">Cancelada</option>
+          <option value="COMPLETADA">Completada</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-between">
+      <button type="button" class="btn btn-secondary" routerLink="/appointments">
+        <i class="fas fa-arrow-left"></i> Volver
+      </button>
+      <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
+        <i class="fas fa-save"></i> {{ isEdit ? 'Actualizar' : 'Guardar' }}
+      </button>
+    </div>
+  </form>
+</div>
